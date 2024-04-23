@@ -8,19 +8,17 @@ class Solution(object):
         # Create a Hash Map for each number as key and n seen as values
         reps = {}
 
-        for number in nums:
-            if number in reps:
-                reps[number] += 1
-            else:
-                reps[number] = 1
+        for n in nums:
+            reps[n] = 1 + reps.get(n, 0)
 
         # Create buckets for n elements
         buckets = [[] for i in range(len(nums) + 1)]
         
-        # Sort dict to get an order list of most frequent elements
+        # Allocate each frequency to its bucket
         for key, value in reps.items():
             buckets[value].append(key)
 
+        # Loop through the buckets and retreieve top frequencies
         output = []
         for i in range(len(buckets) - 1, 0, -1):
             for j in buckets[i]:
