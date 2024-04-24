@@ -6,21 +6,7 @@ class Solution(object):
         """
 
         # Loop through the string and make a list, eliminating all " ".
-        words = []
-        current_word = ""
-
-        for c in s:
-            if c != " ":
-                current_word += c
-            else:
-                if current_word != "":
-                    words.append(current_word)
-                    current_word = ""
-                else:
-                    continue
-                    
-        if current_word != "":
-            words.append(current_word)
+        words = s.split()
 
         i, j = 0, -1
 
