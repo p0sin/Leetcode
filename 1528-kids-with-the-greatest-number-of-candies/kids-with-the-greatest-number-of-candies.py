@@ -7,13 +7,7 @@ class Solution(object):
         """
 
         greatest = max(candies)
-        res = []
-
-        for kid in candies:
-            if kid + extraCandies >= greatest:
-                res.append(True)
-            else:
-                res.append(False)
+        res = [i + extraCandies >= greatest for i in candies]
 
         return res
 
