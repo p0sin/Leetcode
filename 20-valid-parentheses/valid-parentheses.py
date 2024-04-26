@@ -5,19 +5,15 @@ class Solution(object):
         :rtype: bool
         """
         stack = []
-        opening = {"(", "{", "["}
-        closing = {")", "}", "]"}
+        hashMap = {")":"(", "]":"[", "}":"{"}
 
-        for i in s:
-            if i in opening:
-                stack.append(i)
-            elif i in closing and len(stack) == 0:
-                return False
-            elif (i ==")" and stack[-1] == "(") or (i =="]" and stack[-1] == "[") or (i =="}" and stack[-1] == "{"):
-                stack.pop(-1)
+        for c in s:
+            if c in hashMap:
+                if stack and stack[-1] == hashMap[c]:
+                    stack.pop()
+                else:
+                    return False
             else:
-                return False
+                stack.append(c)
 
-        if len(stack) > 0:
-            return False
-        return True
+        return True if not stack else False
