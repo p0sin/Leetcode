@@ -6,19 +6,14 @@ class Solution(object):
         """
 
         buy = prices[0]
-        sell = 0
         maxProfit = 0
 
         for p in prices:
             if p < buy:
-                maxProfit = max(maxProfit, sell - buy)
-                sell = 0
                 buy = p
-            elif p > sell:
-                sell = p
-            
-        maxProfit= max(maxProfit, sell-buy)
-
+            else:
+                maxProfit = max(maxProfit, p - buy)
+       
         return maxProfit
 
 
