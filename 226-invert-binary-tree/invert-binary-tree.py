@@ -12,15 +12,13 @@ class Solution(object):
         """
 
         if root is None:
-            return
+            return None
 
-        if root.left is None and root.right is None:
-            return root
-        
-        tempNode = TreeNode()
-        tempNode = self.invertTree(root.left)
-        root.left = self.invertTree(root.right)
-        root.right = tempNode
+        temp = root.left
+        root.left = root.right
+        root.right = temp
+
+        self.invertTree(root.left)
+        self.invertTree(root.right)
 
         return root
-        
