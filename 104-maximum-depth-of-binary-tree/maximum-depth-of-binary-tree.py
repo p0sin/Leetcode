@@ -10,9 +10,7 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-
-        if root == None:
+        if root is None:
             return 0
 
-        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
-        
+        return max(self.maxDepth(root.left) + 1, self.maxDepth(root.right) + 1)
