@@ -3,15 +3,18 @@ class Solution(object):
         """
         :type n: int
         :rtype: int
-        """
+        """     
+
         if n == 1:
-            return n
-            
-        one, two, total = 1, 1, 0
+            return 1
+        elif n == 2:
+            return 2
 
-        for i in range(n - 1):
-            total= two + one
-            two = one
-            one =  total
-
-        return total
+        a, b = 1, 2
+        for i in range(3, n + 1):
+            temp = b
+            b = a + b
+            a = temp
+        
+        return b
+        
