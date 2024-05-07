@@ -4,30 +4,41 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        # option 1        
-        # cache = {}
+        # OPTION 1 RECURSIVE BACK TRACKING        
+        # if n <= 1:
+        #     return n
+        # return self.fib(n - 1) + self.fib(n - 2)
 
-        # if n in cache:
-        #     return chache[n]
-        # elif n < 2:
-        #     cache[n] = n
-        #     return cache[n]
+        # OPTION 2 TOP DOWN WITH MEMOIZATION
+        # memo = {}
+        # if n in memo:
+        #     return memo[n]
+        # elif n <= 1:
+        #     return n
         # else:
-        #     cache[n] = self.fib(n - 1) + self.fib(n - 2)
+        #     memo[n] = self.fib(n - 1) + self.fib(n - 2)
 
-        #     return cache[n]
+        # return memo[n]
 
-        # option 2
-        if n == 0:
-            return 0
-        elif n == 1:
-            return 1
+        # OPTION 3 BOTTOM-UP WITH TABULATION
+        # if n <= 1:
+        #     return n
+        # tab = [0, 1]
 
-        one, two = 0, 1
-        for num in range(2, n):
-            temp = two
-            two = one + two
-            one = temp
+        # for i in range(2, n + 1):
+        #     tab.append(tab[i - 1] + tab[i - 2])
 
-        return one + two
-    
+        # return tab[n]
+
+        # OPTION 4 BOTTOM-UP WITH NO MEMORY
+        if n <= 1:
+            return n
+
+        a, b = 0, 1
+
+        for i in range(2, n + 1):
+            temp = b
+            b += a
+            a = temp
+
+        return b
