@@ -4,16 +4,25 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
+
         stack = []
-        hashMap = {")":"(", "]":"[", "}":"{"}
 
-        for c in s:
-            if c in hashMap:
-                if stack and stack[-1] == hashMap[c]:
-                    stack.pop()
-                else:
-                    return False
+        for b in s:
+            if b == "(" or b == "[" or b == "{":
+                stack.append(b)
+            
             else:
-                stack.append(c)
+                if not stack:
+                    return False
+                elif b == ")" and stack[-1] != "(":
+                    return False
+                elif b == "]" and stack[-1] != "[":
+                    return False
+                elif b == "}" and stack[-1] != "{":
+                    return False
+                stack.pop()
+        if stack:
+            return False
+        return True
 
-        return True if not stack else False
+        
