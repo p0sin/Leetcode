@@ -6,23 +6,16 @@ class Solution(object):
         """
 
         stack = []
+        closeToOpen = {")" : "(", "}" : "{", "]" : "[" }
 
-        for b in s:
-            if b == "(" or b == "[" or b == "{":
-                stack.append(b)
-            
+        for c in s:
+            if c in closeToOpen:
+                if stack and stack[-1] == closeToOpen[c]:
+                    stack.pop()
+                else:
+                    return False
             else:
-                if not stack:
-                    return False
-                elif b == ")" and stack[-1] != "(":
-                    return False
-                elif b == "]" and stack[-1] != "[":
-                    return False
-                elif b == "}" and stack[-1] != "{":
-                    return False
-                stack.pop()
-        if stack:
-            return False
-        return True
+                stack.append(c)
+        return True if not stack else False
 
         
