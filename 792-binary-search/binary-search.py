@@ -6,20 +6,17 @@ class Solution(object):
         :rtype: int
         """
 
-        l = 0
-        r = len(nums) - 1
+        l, r = 0, len(nums) - 1
 
         while l <= r:
-            m = l + (r - l) // 2
-            if nums[m] == target:
-                return m 
+            mid = (l + r) // 2
 
-            elif nums[m] > target:
-                r = m - 1
+            if target > nums[mid]:
+                l = mid + 1
+            elif target < nums[mid]:
+                r = mid - 1
             else:
-                l = m + 1
+                return mid
 
         return -1
-
-
         
