@@ -5,22 +5,23 @@ class Solution(object):
         :type h: int
         :rtype: int
         """
-        def isValid(k, piles, h):
-            totalHours = 0
-            for p in piles:
-                totalHours += (p + k - 1) // k  # Equivalent to math.ceil(p / k)
-            return totalHours <= h
-
         l, r = 1, max(piles)
-        
+        res = r
+
         while l <= r:
-            mid = (l + r) // 2
-            if isValid(mid, piles, h):
-                r = mid - 1
+            k = (l + r) // 2
+            hours = 0
+
+            for p in piles:
+                hours += (p + k - 1) // k 
+
+            if hours <= h:
+                res = k  # We can directly set res to k
+                r = k - 1
             else:
-                l = mid + 1
-        
-        return l
+                l = k + 1
+                
+        return res
 
 
                 
