@@ -5,6 +5,13 @@
 #         self.left = left
 #         self.right = right
 class Solution(object):
+
+    # FIND MIN FUNCTION
+    def findMin(self, root):
+        while root.left:
+            root = root.left
+        return root.val
+
     def deleteNode(self, root, key):
         """
         :type root: TreeNode
@@ -12,23 +19,26 @@ class Solution(object):
         :rtype: TreeNode
         """
         if not root:
-            return root
+            return None
 
         if key > root.val:
             root.right = self.deleteNode(root.right, key)
         elif key < root.val:
             root.left = self.deleteNode(root.left, key)
         else:
+            # CASE 1
             if not root.left:
                 return root.right
             elif not root.right:
                 return root.left
+            else:
+                # CASE 2
+                root.val = self.findMin(root.right)
+                root.right = self.deleteNode(root.right, root.val)
 
-            # Find the min from right subtree
-            cur = root.right
-            while cur.left:
-                cur = cur.left
-            root.val = cur.val
-            root.right = self.deleteNode(root.right, root.val)
         return root
+
+
+
+
         
