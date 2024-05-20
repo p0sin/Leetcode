@@ -10,17 +10,20 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[int]
         """
+    
         output = []
-        def inOrder(root, output):
-            if root is None:
-                return
+        return self.inOrder(root, output)
 
-            inOrder(root.left, output)
-            output.append(root.val)
-            inOrder(root.right, output)
+    def inOrder(self, root, output):
+        if root is None:
+            return
 
-            return output
+        self.inOrder(root.left, output)
+        output.append(root.val)
+        self.inOrder(root.right, output)
 
-        return inOrder(root, output)
+        return output
+
+    
 
     
