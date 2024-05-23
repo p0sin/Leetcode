@@ -1,29 +1,29 @@
-class Solution(object):
-    def numIslands(self, grid):
-        """
-        :type grid: List[List[str]]
-        :rtype: int
-        """
-        if not grid:
-            return 0 
-
-        rows, cols = len(grid), len(grid[0])
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        ROWS, COLS = len(grid), len(grid[0])
         islands = 0
 
-        def dfs(r, c):
-            if r < 0 or r >= rows or c < 0 or c >= cols or grid[r][c] == '0':
+        def dfs(row, col):
+            # Base cases to handle out-of-bounds or visited cells
+            if row < 0 or row >= ROWS or col < 0 or col >= COLS or grid[row][col] == "0":
                 return
-            grid[r][c] = '0'
 
-            dfs(r - 1, c) # Up
-            dfs(r + 1, c) # Down
-            dfs(r, c - 1) # Left
-            dfs(r, c + 1) # Right
+            grid[row][col] = "0"  # Mark cell as visited to prevent revisiting
 
-        for r in range(rows):
-            for c in range(cols):
-                if grid[r][c] == '1': # Found Island
+            # Explore adjacent unvisited land cells (using DFS recursively)
+            dfs(row + 1, col)
+            dfs(row - 1, col)
+            dfs(row, col + 1)
+            dfs(row, col - 1)
+
+        # Iterate through the grid, calling DFS for each unvisited "1" cell
+        for row in range(ROWS):
+            for col in range(COLS):
+                if grid[row][col] == "1":
                     islands += 1
-                    dfs(r, c) # Check for adjacent piece of land
+                    dfs(row, col)
 
         return islands
+        
+
+        
