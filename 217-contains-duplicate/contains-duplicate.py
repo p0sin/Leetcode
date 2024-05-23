@@ -1,16 +1,13 @@
-class Solution(object):
-    def containsDuplicate(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: bool
-        """
-        # Create a dict to save number already seen
-        previous_dict = {}
-        # Iterate through loop
-        for current in nums:
-            # Check if current is in previous_dict
-            if current in previous_dict:
-                return True
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        numsSet = set(nums)
+
+        for n in nums:
+            if n in numsSet:
+                numsSet.remove(n)
             else:
-                previous_dict[current] = True
+                return True
         return False
+
+        
+        
