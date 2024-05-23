@@ -1,22 +1,23 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        ans = []
+        combinations = []
+        current = []
 
-        def helper(i, cur, total):
-            if total == target:
-                ans.append(cur.copy())
+        def backtrack(i=0):
+            if sum(current) == target:
+                combinations.append(current.copy())
                 return
-            if total > target or i >= len(candidates):
+
+            if sum(current) > target or i == len(candidates):
                 return
 
-            
-            # keep including candidates[i]
-            cur.append(candidates[i])
-            helper(i, cur, total + candidates[i])
+            # Include current element
+            current.append(candidates[i])
+            backtrack(i)
 
-            # stop including candidates[i]
-            cur.pop()
-            helper(i + 1, cur, total)
+            # Do not include current element
+            current.pop()
+            backtrack(i + 1)
 
-        helper(0, [], 0)
-        return ans
+        backtrack()
+        return combinations
