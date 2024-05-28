@@ -1,13 +1,15 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
 
-        rob1, rob2 = 0, 0
+        n = len(nums)
+        if n == 1: return nums[0]
+        if n == 2: return max(nums[0], nums[1])
 
-        for n in nums:
-            temp = max(n + rob1, rob2)
-            rob1 = rob2
-            rob2 = temp
+        dp = [nums[0], max(nums[0], nums[1])]
 
-        return rob2
+        for i in range(2, n):
+            curr = max(dp[i - 2] + nums[i], dp[i - 1])
+            dp.append(curr)
 
+        return dp[n - 1]
 
