@@ -1,17 +1,15 @@
-class Solution(object):
-    def climbStairs(self, n):
-        """
-        :type n: int
-        :rtype: int
-        """
+class Solution:
+    def climbStairs(self, n: int) -> int:
         if n <= 2:
             return n
 
-        n1, n2 = 1, 2
-        for i in range(3, n + 1):
-            res = n1 + n2
-            n1 = n2
-            n2 = res
-        return res
- 
-        
+        dp = [1, 2]
+
+        i = 3
+        while i <= n:
+            temp = dp[0]
+            dp[0] = dp[1]
+            dp[1] = temp + dp[0]
+            i += 1
+
+        return dp[1]
