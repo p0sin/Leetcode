@@ -5,13 +5,10 @@ class Solution:
         seen = set()
 
         for R in range(len(s)):
-            if s[R] not in seen:
-                seen.add(s[R])
-                res = max(res, R - L + 1)
-            else:
-                while s[R] != s[L]:
-                    seen.remove(s[L])
-                    L += 1
+            while s[R] in seen:
+                seen.remove(s[L])
                 L += 1
+            seen.add(s[R])
+            res = max(res, R - L + 1)
 
         return res
