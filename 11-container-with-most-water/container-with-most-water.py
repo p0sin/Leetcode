@@ -1,25 +1,16 @@
-class Solution(object):
-    def maxArea(self, height):
-        """
-        :type height: List[int]
-        :rtype: int
-        """
-        i, j = 0, len(height) - 1
-        switch, max = 0, 0
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        l, r = 0, len(height) - 1
 
-        while i < j:
-            b = j - i
-            h = min(height[i], height[j])
-            rec = b * h
+        res = (r - l) * min(height[l], height[r])
 
-            if rec > max:
-                max = rec
-            
-            if height[j] > height[i]:
-                i += 1
+        while l < r:
+            if height[r] > height[l]:
+                l += 1
             else:
-                j -= 1
+                r -= 1
 
-        return max
+            res = max(res, (r - l) * min(height[l], height[r]))
 
+        return res
         
